@@ -157,3 +157,4 @@ Ref # | Project Name | Description | Link
 5 | `gcp-gpu-monitor` | Monitor usage of your GPUs in Google Cloud | [https://github.com/iankoulski/gcp-gpu-monitor](https://github.com/iankoulski/gcp-gpu-monitor)
 6 | `romario` | REST API for kick-starting Kubeflow pipelines | [https://github.com/fabiononato/romario](https://github.com/fabiononato/romario)
 7 | `face-recognition` | An example of Depend on Docker for AI applications | [https://github.com/iankoulski/depend-on-docker-ai](https://github.com/iankoulski/depend-on-docker-ai) 
+8 | `gitlab` | Depend on Docker for DevOps | [https://github.com/iankoulski/gitlab](https://github.com/iankoulski/gitlab)
