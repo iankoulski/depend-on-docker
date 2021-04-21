@@ -1,10 +1,16 @@
-FROM alpine
+ARG BASE_IMAGE_PATH="alpine:latest"
 
-MAINTAINER My Name <email@company.com>
+FROM $BASE_IMAGE_PATH
 
+ARG MAINTAINER="Full Name <email@company.com>"
+ARG DESCRIPTION="Depend on Docker Image"
 ARG http_proxy
 ARG https_proxy
 ARG no_proxy
+
+LABEL MAINTAINER="$MAINTAINER"
+
+LABEL DESCRIPTION="$DESCRIPTION"
 
 ADD Container-Root /
 
