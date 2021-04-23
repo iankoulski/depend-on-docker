@@ -2,6 +2,7 @@ ARG BASE_IMAGE_PATH="alpine:latest"
 
 FROM $BASE_IMAGE_PATH
 
+ARG BUILD="202104"
 ARG MAINTAINER="Full Name <email@company.com>"
 ARG DESCRIPTION="Depend on Docker Image"
 ARG http_proxy
@@ -11,6 +12,8 @@ ARG no_proxy
 LABEL MAINTAINER="$MAINTAINER"
 
 LABEL DESCRIPTION="$DESCRIPTION"
+
+LABEL BUILD="$BUILD"
 
 ADD Container-Root /
 
