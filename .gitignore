@@ -24,5 +24,7 @@ _testmain.go
 *.prof
 .DS_Store
 
-linux/to/compose/docker-compose.yaml
+*.swp
+linux/to/compose/app
+linux/to/kubernetes/app
 

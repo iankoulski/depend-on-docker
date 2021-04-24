@@ -1,31 +1,31 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: ${deployment_name}
-  namespace: ${namespace}
+  name: ${APP_NAME}
+  namespace: ${NAMESPACE}
   labels:
-    app: ${app_name}
+    app: ${APP_NAME}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${app_name}
+      app: ${APP_NAME}
   template:
     metadata:
       labels:
-        app: ${app_name}
+        app: ${APP_NAME}
     spec:
       #nodeSelector:
-      #  beta.kubernetes.io/instance-type: "${instance_type}"
+      #  beta.kubernetes.io/instance-type: "${INSTANCE_TYPE}"
       containers:
       - name: main
-        image: "${image}:${tag}"
+        image: "${REGISTRY}${IMAGE}${TAG}"
         imagePullPolicy: Always
-        command: ["${command}"]
-        args: ["${args}"]
+        #command: ["${command}"]
+        #args: ["${args}"]
         ports:
         - name: pod-port
-          containerPort: ${pod_port}
+          containerPort: ${PORT_INTERNAL}
         #resources:
         #  limits:
         #    cpu: 4

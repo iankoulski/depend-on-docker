@@ -1,15 +1,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ${service_name}
-  namespace: ${namespace}
+  name: ${APP_NAME}
+  namespace: ${NAMESPACE}
   labels:
-    app: ${app_name}
+    app: ${APP_NAME}
 spec:
   ports:
   - name: svc-port
-    port: ${svc_port}
+    port: ${PORT_EXTERNAL}
     targetPort: pod-port 
   type: ClusterIP
   selector:
-    app: ${app_name}
+    app: ${APP_NAME}
