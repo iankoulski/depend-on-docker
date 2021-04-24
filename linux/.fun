@@ -40,3 +40,12 @@ function hostip
 ## End hostip function 
 hostip
 
+## Check default target orchestrator
+function checkTO
+{
+	if [ ! "$1" == "docker" ]; then
+		echo ""
+		echo "WARNING: Unrecognized target orchestrator TO=$1. Defaulting to docker."
+		echo ""
+	fi	
+}

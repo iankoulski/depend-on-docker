@@ -1,4 +1,4 @@
 #!/bin/bash
 
-vi .env
+vi -c ":syntax on" .env
 
