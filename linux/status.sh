@@ -14,6 +14,7 @@ case "${TO}" in
 		CMD="docker stack ps ${SWARM_STACK_NAME}"
 		;;
 	"kubernetes")
+		CMD="${KUBECTL} -n ${NAMESPACE} get all"
 		;;
 	*)
 		checkTO "${TO}"

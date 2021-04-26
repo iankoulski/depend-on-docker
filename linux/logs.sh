@@ -22,6 +22,7 @@ case "${TO}" in
 		fi	
 		;;
 	"kubernetes")
+		CMD="${KUBETAIL} ${APP_NAME} -n ${NAMESPACE}"
 		;;
 	*)
                 checkTO "${TO}"

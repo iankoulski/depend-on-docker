@@ -3,7 +3,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: ${APP_NAME}
   namespace: ${NAMESPACE}
-  lables:
+  labels:
     app: ${APP_NAME}
 spec:
   scaleTargetRef:

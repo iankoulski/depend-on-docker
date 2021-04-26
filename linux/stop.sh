@@ -14,6 +14,7 @@ case "${TO}" in
 		CMD="docker stack rm ${SWARM_STACK_NAME}"
 		;;
 	"kubernetes")
+		CMD="${KUBECTL} delete -f ${KUBERNETES_APP_PATH}"
 		;;
 	*)
                 checkTO "${TO}"

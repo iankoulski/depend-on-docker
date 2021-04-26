@@ -12,10 +12,9 @@ else
 	MODE=-it
 fi 
 
-generate_docker_compose 
+function generate_docker_compose
 {
-	env > /tmp/myenv
-	CMD="docker run --rm -it --env-file /tmp/myenv -v $(pwd):/wd iankoulski/envsubst sh -c \"envsubst < /wd/${COMPOSE_TEMPLATE} > /wd/${COMPOSE_FILE} && chown $(id -u):$(id -g) /wd/${COMPOSE_FILE}\"" 
+	CMD="${ENVSUBST} < ${COMPOSE_TEMPLATE} > ${COMPOSE_FILE}" 
 	if [ "${VERBOSE}" == "true" ]; then
 		echo "${CMD}"
 	fi
@@ -24,10 +23,9 @@ generate_docker_compose
 	fi
 }
 
-generate_kubernetes_manifests
+function generate_kubernetes_manifests
 {
-	env > /tmp/myenv
-	CMD="docker run --rm -it --env-file /tmp/myenv -v $(pwd):/wd iankoulski/envsubst sh -c \"for f in $(ls ${KUBERNETES_TEMPLATE_PATH}/*.yaml); do m=${KUBERNETES_APP_PATH/$(basename $f)}; envsubst < \$f > /wd/$m; chown $(id -u):$(id -g) /wd/$m; done\""
+	CMD="BASE_PATH=$(pwd); cd ${KUBERNETES_TEMPLATE_PATH}; for f in *.yaml; do cat \$f | envsubst > \${BASE_PATH}/\${KUBERNETES_APP_PATH}/\$f; done; cd \${BASE_PATH}"
         if [ "${VERBOSE}" == "true" ]; then
                 echo "${CMD}"
         fi
@@ -48,7 +46,7 @@ case "${TO}" in
 		;;
 	"kubernetes")
 		generate_kubernetes_manifests
-		CMD="kubectl apply -f ${KUBERNETES_APP_PATH}"
+		CMD="${KUBECTL} -n ${NAMESPACE} apply -f ${KUBERNETES_APP_PATH}"
 		;;
 	*)
 		checkTO "${TO}"
@@ -62,6 +60,7 @@ fi
 
 if [ "${DRY_RUN}" == "false" ]; then
 	eval "${CMD}"
+	echo ""
 fi
 
 if [ "${DEBUG}" == "true" ]; then
