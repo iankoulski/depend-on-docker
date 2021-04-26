@@ -43,7 +43,7 @@ case "${TO}" in
                 if [ "$CONTAINER_INDEX" == "" ]; then
                         CONTAINER_INDEX=1
                 fi
-		CMD="${KUBECTL} -n ${NAMESPACE} exec -it $( ${KUBECTL} -n ${NAMESPACE} get pod | grep ${APP_NAME} | head -n ${CONTAINER_INDEX} | cut -d ' ' -f 1 ) -- sh -c 'if [ -e /bin/bash ]; then /bin/bash; else sh; fi'"
+		CMD="unset DEBUG; ${KUBECTL} -n ${NAMESPACE} exec -it $( ${KUBECTL} -n ${NAMESPACE} get pod | grep ${APP_NAME} | head -n ${CONTAINER_INDEX} | cut -d ' ' -f 1 ) -- sh -c 'if [ -e /bin/bash ]; then /bin/bash; else sh; fi'"
 		;;
 	*)
 		checkTO "${TO}"
