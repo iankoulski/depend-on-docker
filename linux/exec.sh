@@ -3,9 +3,9 @@
 source .env
 
 if [ "$1" == "" ]; then
-	CMD="sh -c 'if [ -e /bin/bash ]; then /bin/bash; else sh; fi'"
+	CMD="/bin/bash"
 else
-	CMD=$@
+	CMD="$@"
 fi
 
 docker container exec -it ${CONTAINER} $CMD 
