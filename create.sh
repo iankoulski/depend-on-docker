@@ -17,6 +17,9 @@ echo ""
 name=$(basename $dest)
 user_id=$(id -u)
 
-docker container run --rm -it -v ${dest}:/wd iankoulski/do-git:latest bash -c "/gitcp.sh ${dod_url} /wd ${user_id}"
-sed -i -e "s/IMAGE=myapp/IMAGE=${name}/g" ${dest}/.env
+docker container run -d --name depend-on-docker -v ${dest}:/wd iankoulski/do-git:latest bash -c "/gitcp.sh ${dod_url} /wd ${user_id}"; docker logs -f depend-on-docker; docker rm -f depend-on-docker
+
+if [ -f ${dest}/.env ]; then
+	sed -i -e "s/IMAGE=myapp/IMAGE=${name}/g" ${dest}/.env
+fi
 
