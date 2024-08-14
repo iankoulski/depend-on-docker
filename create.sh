@@ -8,7 +8,7 @@ else
 	dest=$(pwd)/$1
 fi
 
-export dod_url=https://github.com/iankoulski/depend-on-docker/branches/to/linux/
+export dod_url=https://github.com/iankoulski/depend-on-docker/tree/to/linux
 
 echo ""
 echo "Copying ${dod_url} to ${dest} ..."
@@ -18,5 +18,6 @@ name=$(basename $dest)
 uid=$(id -u)
 gid=$(id -g)
 
-docker container run --rm --name dod-create -d -e http_proxyHost=$http_proxyHost -e http_proxyPort=$http_proxyPort -v ${dest}:/wd iankoulski/svn sh -c "if [ ! -z "$http_proxyHost" ]; then (mkdir -p ~/.subversion; echo [global] | tee ~/.subversion/servers; echo http-proxy-host=${http_proxyHost} | tee -a ~/.subversion/servers; echo http-proxy-port=${http_proxyPort} | tee -a ~/.subversion/servers); fi; svn checkout --trust-server-cert --non-interactive ${dod_url} /wd && rm -rf /wd/.svn && sed -i -e \"s/IMAGE=myapp/IMAGE=${name}/g\" /wd/.env && chown -R $uid:$gid /wd" && docker container logs -f dod-create
+docker container run --rm -it -v ${dest}:/wd iankoulski/do-git:latest bash -c "/gitcp.sh ${dod_url} /wd ${UID}"
+sed -i -e "s/IMAGE=myapp/IMAGE=${name}/g" ${dest}/.env
 
