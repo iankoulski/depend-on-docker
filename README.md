@@ -17,11 +17,7 @@ This project works on both Linux and Windows. It strives to drastically simplify
 
 or
 
-    docker container run --rm -it -v $(pwd):/wd iankoulski/svn sh -c "svn checkout https://github.com/iankoulski/depend-on-docker/trunk/linux/ /wd && rm -rf /wd/.svn"
-
-or
-
-    curl -L http://bit.ly/dodocker-linux | bash -s -- $(pwd)
+    docker container run --rm -it -v $(pwd):/wd iankoulski/do-git /gitcp.sh https://github.com/iankoulski/depend-on-docker/tree/to/linux /wd ${UID}
 
 $(pwd) may be replaced with the desired path where you would like your new depend-on-docker project created.
 
